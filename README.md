@@ -83,6 +83,17 @@ ersoz-inc-platform/
 └── README.md
 ```
 
+## 📚 Documentation
+
+Comprehensive documentation is available in the [`/docs`](docs/) folder:
+
+- **[Start Application](docs/START_APPLICATION.md)** - How to run the backend and frontend servers
+- **[Setup Guide](docs/SETUP.md)** - Complete installation and configuration instructions
+- **[Completion Status](docs/COMPLETION_STATUS.md)** - Current project progress and features
+- **[MongoDB Troubleshooting](docs/MONGODB_TROUBLESHOOTING.md)** - Database connection help
+
+See the [docs README](docs/README.md) for a complete list of available documentation.
+
 ## API Documentation
 
 The API documentation is available at `/api/docs` when running the development server.
