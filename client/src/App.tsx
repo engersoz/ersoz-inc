@@ -10,12 +10,8 @@ import HomePage from './pages/HomePage'
 import ProductsPage from './pages/ProductsPage'
 import LoginPage from './pages/LoginPage'
 
-// Hooks
-import { useAuthStore } from './store/authStore'
-
 function App() {
   const location = useLocation()
-  const { user } = useAuthStore()
 
   // Check if current page should have minimal layout (auth pages)
   const isAuthPage = ['/login', '/register'].includes(location.pathname)
