@@ -6,7 +6,7 @@ import axios from 'axios';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const { setUser, setToken } = useAuthStore();
+  const { setAuth } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -23,12 +23,11 @@ const LoginPage: React.FC = () => {
 
     try {
       const response = await axios.post('/api/auth/login', formData);
-      const { token, user } = response.data.data;
+      const { token, refreshToken, user } = response.data.data;
       
-      setToken(token);
-      setUser(user);
+      setAuth(user, token, refreshToken || token);
       
-      navigate('/dashboard');
+      navigate('/');
     } catch (err: any) {
       setError(err.response?.data?.error?.message || 'Login failed. Please try again.');
     } finally {

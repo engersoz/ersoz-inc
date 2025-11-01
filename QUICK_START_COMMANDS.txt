@@ -1,0 +1,104 @@
+╔══════════════════════════════════════════════════════════════╗
+║         ERSOZ INC - Quick Start Commands for Windows        ║
+║         Copy and paste these into PowerShell/CMD             ║
+╚══════════════════════════════════════════════════════════════╝
+
+══════════════════════════════════════════════════════════════
+STEP 1: Clone the Repository
+══════════════════════════════════════════════════════════════
+
+cd "C:\Users\enger\OneDrive\Documents\Projects"
+git clone https://github.com/engersoz/ersoz-inc.git ersozinc
+cd ersozinc
+git checkout feature/complete-platform
+
+══════════════════════════════════════════════════════════════
+STEP 2: Set Up Backend Environment
+══════════════════════════════════════════════════════════════
+
+cd server
+Copy-Item .env.example .env
+notepad .env
+
+>> Edit the .env file with:
+   - MongoDB URI: mongodb+srv://engersoz_db_user:vrAet1ArxEgb5xGM@ersozinc.6wnw7zk.mongodb.net/?retryWrites=true&w=majority&appName=ersozinc&dbName=ersoz_platform
+   
+>> Generate secrets by running:
+   node -e "console.log('JWT_SECRET=' + require('crypto').randomBytes(32).toString('hex')); console.log('REFRESH_TOKEN_SECRET=' + require('crypto').randomBytes(32).toString('hex')); console.log('ENCRYPTION_KEY=' + require('crypto').randomBytes(32).toString('hex'));"
+
+>> Copy the output and paste into .env file, then save
+
+══════════════════════════════════════════════════════════════
+STEP 3: Install Backend Dependencies
+══════════════════════════════════════════════════════════════
+
+npm install
+
+══════════════════════════════════════════════════════════════
+STEP 4: Create Admin User
+══════════════════════════════════════════════════════════════
+
+node src/scripts/createAdminUser.js
+
+══════════════════════════════════════════════════════════════
+STEP 5: Install Frontend Dependencies
+══════════════════════════════════════════════════════════════
+
+cd ..\client
+npm install
+
+══════════════════════════════════════════════════════════════
+STEP 6: Start Backend Server (Window 1)
+══════════════════════════════════════════════════════════════
+
+cd C:\Users\enger\OneDrive\Documents\Projects\ersozinc\server
+npm start
+
+>> Keep this window open!
+
+══════════════════════════════════════════════════════════════
+STEP 7: Start Frontend Server (Window 2)
+══════════════════════════════════════════════════════════════
+
+cd C:\Users\enger\OneDrive\Documents\Projects\ersozinc\client
+npm run dev
+
+>> Keep this window open too!
+
+══════════════════════════════════════════════════════════════
+STEP 8: Access Your Platform
+══════════════════════════════════════════════════════════════
+
+Open browser: http://localhost:3000
+
+Login credentials:
+  📧 Email:    admin@ersozinc.com
+  🔑 Password: Admin@123456
+
+══════════════════════════════════════════════════════════════
+TROUBLESHOOTING
+══════════════════════════════════════════════════════════════
+
+Kill process on port:
+  npx kill-port 3000
+  npx kill-port 5000
+
+Reinstall dependencies:
+  cd server
+  Remove-Item -Recurse -Force node_modules
+  npm install
+
+Check if servers are running:
+  netstat -ano | findstr :3000
+  netstat -ano | findstr :5000
+
+══════════════════════════════════════════════════════════════
+QUICK START (Using Batch File)
+══════════════════════════════════════════════════════════════
+
+Once setup is complete, just double-click:
+  start-all.bat
+
+This will start both servers automatically!
+
+══════════════════════════════════════════════════════════════

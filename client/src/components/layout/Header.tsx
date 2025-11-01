@@ -5,8 +5,6 @@ import {
   Menu, 
   X, 
   Search, 
-  User, 
-  ShoppingBag, 
   Settings, 
   LogOut,
   ChevronDown,

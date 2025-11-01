@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Search, Filter, Grid, List, ChevronDown, X } from 'lucide-react';
+import { Search, Filter, Grid, List, X } from 'lucide-react';
 import axios from 'axios';
 
 interface Product {
