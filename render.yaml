@@ -1,0 +1,27 @@
+services:
+  # Backend API Service
+  - type: web
+    name: ersoz-inc-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd server && npm ci
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_REFRESH_SECRET
+        generateValue: true
+      - key: ENCRYPTION_KEY
+        generateValue: true
+      - key: CORS_ORIGIN
+        value: https://ersoz-inc.vercel.app
+      - key: SESSION_SECRET
+        generateValue: true
+    healthCheckPath: /health
