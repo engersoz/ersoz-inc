@@ -9,16 +9,19 @@ const router = express.Router();
 // All routes require authentication
 router.use(protect);
 
-// Email transporter setup
-const emailTransporter = nodemailer.createTransporter({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT,
-  secure: false,
-  auth: {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  },
-});
+// Email transporter setup (only if SMTP is configured)
+let emailTransporter = null;
+if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+  emailTransporter = nodemailer.createTransporter({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    secure: false,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  });
+}
 
 // Twilio client setup
 const twilioClient = process.env.TWILIO_ACCOUNT_SID 
@@ -162,7 +165,7 @@ router.post('/send', authorize('admin', 'sales'), [
         const recipientData = { ...data, ...recipient };
         
         // Send email if requested and template exists
-        if (channels.includes('email') && template.email && recipient.email) {
+        if (channels.includes('email') && template.email && recipient.email && emailTransporter) {
           const subject = renderTemplate(template.email.subject, recipientData);
           const html = renderTemplate(template.email.html, recipientData);
           
