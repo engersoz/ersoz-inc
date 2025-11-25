@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Lock, Mail, Eye, EyeOff } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
-import axios from 'axios';
+import api from '../lib/api';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const LoginPage: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/auth/login', formData);
+      const response = await api.post('/v1/auth/login', formData);
       const { token, refreshToken, user } = response.data.data;
       
       setAuth(user, token, refreshToken || token);

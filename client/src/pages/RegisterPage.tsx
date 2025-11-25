@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Lock, Mail, Eye, EyeOff, User, Building, Phone, MapPin } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
-import axios from 'axios';
+import api from '../lib/api';
 
 const RegisterPage: React.FC = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const RegisterPage: React.FC = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/auth/register', {
+      const response = await api.post('/v1/auth/register', {
         name: formData.name,
         email: formData.email,
         password: formData.password,
