@@ -80,6 +80,23 @@ app.use((req, res, next) => {
   next();
 });
 
+// Root endpoint - API information
+app.get('/', (req, res) => {
+  res.status(200).json({
+    name: 'ERSOZ INC Platform API',
+    version: '1.0.0',
+    status: 'running',
+    description: 'B2B Platform API for Glass Mosaic Tiles, Murals, and Ceramic Tiles Distribution',
+    endpoints: {
+      health: '/health',
+      api: `/api/${process.env.API_VERSION || 'v1'}`,
+      documentation: process.env.NODE_ENV !== 'production' ? '/api-docs' : 'Not available in production'
+    },
+    timestamp: new Date().toISOString(),
+    environment: process.env.NODE_ENV
+  });
+});
+
 // Health check endpoint
 app.get('/health', (req, res) => {
   res.status(200).json({
