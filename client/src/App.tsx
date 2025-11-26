@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom'
 // Layout components
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
+import AdminLayout from './components/admin/AdminLayout'
 
 // Pages
 import HomePage from './pages/HomePage'
@@ -16,12 +17,35 @@ import RegisterPage from './pages/RegisterPage'
 import DashboardPage from './pages/DashboardPage'
 import QuotesPage from './pages/QuotesPage'
 
+// Admin Pages
+import AdminDashboardPage from './pages/admin/AdminDashboardPage'
+import UsersManagementPage from './pages/admin/UsersManagementPage'
+import ProductsManagementPage from './pages/admin/ProductsManagementPage'
+
 function App() {
   const location = useLocation()
 
-  // Check if current page should have minimal layout (auth pages)
+  // Check if current page should have minimal layout (auth pages or admin pages)
   const isAuthPage = ['/login', '/register'].includes(location.pathname)
+  const isAdminPage = location.pathname.startsWith('/admin')
   
+  // Admin pages use their own layout
+  if (isAdminPage) {
+    return (
+      <Routes>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route index element={<AdminDashboardPage />} />
+          <Route path="users" element={<UsersManagementPage />} />
+          <Route path="products" element={<ProductsManagementPage />} />
+          <Route path="orders" element={<div className="text-center py-12"><h2 className="text-2xl font-bold">Orders Management (Coming Soon)</h2></div>} />
+          <Route path="quotes" element={<div className="text-center py-12"><h2 className="text-2xl font-bold">Quotes Management (Coming Soon)</h2></div>} />
+          <Route path="analytics" element={<div className="text-center py-12"><h2 className="text-2xl font-bold">Analytics (Coming Soon)</h2></div>} />
+          <Route path="settings" element={<div className="text-center py-12"><h2 className="text-2xl font-bold">Settings (Coming Soon)</h2></div>} />
+        </Route>
+      </Routes>
+    )
+  }
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header - hidden on auth pages */}
