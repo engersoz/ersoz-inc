@@ -21,6 +21,7 @@ import QuotesPage from './pages/QuotesPage'
 import AdminDashboardPage from './pages/admin/AdminDashboardPage'
 import UsersManagementPage from './pages/admin/UsersManagementPage'
 import ProductsManagementPage from './pages/admin/ProductsManagementPage'
+import OrdersManagementPage from './pages/admin/OrdersManagementPage'
 
 function App() {
   const location = useLocation()
@@ -37,7 +38,7 @@ function App() {
           <Route index element={<AdminDashboardPage />} />
           <Route path="users" element={<UsersManagementPage />} />
           <Route path="products" element={<ProductsManagementPage />} />
-          <Route path="orders" element={<div className="text-center py-12"><h2 className="text-2xl font-bold">Orders Management (Coming Soon)</h2></div>} />
+          <Route path="orders" element={<OrdersManagementPage />} />
           <Route path="quotes" element={<div className="text-center py-12"><h2 className="text-2xl font-bold">Quotes Management (Coming Soon)</h2></div>} />
           <Route path="analytics" element={<div className="text-center py-12"><h2 className="text-2xl font-bold">Analytics (Coming Soon)</h2></div>} />
           <Route path="settings" element={<div className="text-center py-12"><h2 className="text-2xl font-bold">Settings (Coming Soon)</h2></div>} />
