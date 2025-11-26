@@ -6,6 +6,7 @@ import { useLocation } from 'react-router-dom'
 import Header from './components/layout/Header'
 import Footer from './components/layout/Footer'
 import AdminLayout from './components/admin/AdminLayout'
+import ProtectedRoute from './components/ProtectedRoute'
 
 // Pages
 import HomePage from './pages/HomePage'
@@ -77,8 +78,8 @@ function App() {
               <Route path="/register" element={<RegisterPage />} />
               
               {/* Protected routes */}
-              <Route path="/dashboard" element={<DashboardPage />} />
-              <Route path="/quotes" element={<QuotesPage />} />
+              <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
+              <Route path="/quotes" element={<ProtectedRoute><QuotesPage /></ProtectedRoute>} />
               
               {/* Catch-all route */}
               <Route path="*" element={
