@@ -12,7 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import HomePage from './pages/HomePage'
 import ProductsPage from './pages/ProductsPage'
 import ProductDetailsPage from './pages/ProductDetailsPage'
-import ConfiguratorPage from './pages/ConfiguratorPage'
+import CertificatesPage from './pages/CertificatesPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import DashboardPage from './pages/DashboardPage'
@@ -71,7 +71,7 @@ function App() {
               <Route path="/" element={<HomePage />} />
               <Route path="/products" element={<ProductsPage />} />
               <Route path="/products/:id" element={<ProductDetailsPage />} />
-              <Route path="/configurator" element={<ConfiguratorPage />} />
+              <Route path="/certificates" element={<CertificatesPage />} />
               
               {/* Auth routes */}
               <Route path="/login" element={<LoginPage />} />

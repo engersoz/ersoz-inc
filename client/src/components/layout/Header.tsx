@@ -9,7 +9,7 @@ import {
   LogOut,
   ChevronDown,
   Grid3X3,
-  Calculator,
+  Award,
   FileText,
   BarChart3
 } from 'lucide-react'
@@ -35,7 +35,7 @@ const Header: React.FC = () => {
   const navigationItems = [
     { name: 'Home', href: '/', icon: null },
     { name: 'Products', href: '/products', icon: Grid3X3 },
-    { name: 'Configurator', href: '/configurator', icon: Calculator },
+    { name: 'Certificates', href: '/certificates', icon: Award },
   ]
 
   const userMenuItems = [
