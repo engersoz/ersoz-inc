@@ -112,11 +112,19 @@ const autoSeedAdminUsers = async () => {
       }
     ];
 
-    // Create all admin users
+    // Create all admin users with explicit reset of account locks
     const created = await User.insertMany(adminUsers);
+    
+    // Ensure all created users are unlocked
+    await User.updateMany(
+      { email: { $in: adminEmails } },
+      { 
+        $unset: { failedLoginAttempts: 1, lockUntil: 1 }
+      }
+    );
 
     console.log('✅ Auto-seed completed successfully!');
-    console.log(`📝 Created ${created.length} admin users:`);
+    console.log(`📝 Created ${created.length} admin users (all unlocked):`);
     console.log('   - Owner: admin@ersozinc.com / Admin123!@#');
     console.log('   - Super Admin: superadmin@ersozinc.com / SuperAdmin123!');
     console.log('   - Admin: manager@ersozinc.com / Manager123!');
