@@ -6,18 +6,38 @@ const User = require('../models/User');
  */
 const autoSeedAdminUsers = async () => {
   try {
-    // Check if any internal staff users exist
-    const existingAdmins = await User.countDocuments({
+    // Define admin emails to check
+    const adminEmails = [
+      'admin@ersozinc.com',
+      'superadmin@ersozinc.com',
+      'manager@ersozinc.com',
+      'sales@ersozinc.com',
+      'support@ersozinc.com'
+    ];
+
+    // Check if any admin users exist (by role OR by email)
+    const existingByRole = await User.countDocuments({
       role: { $in: ['owner', 'super_admin', 'admin'] }
     });
 
-    // If admin users already exist, skip seeding
-    if (existingAdmins > 0) {
-      console.log('✅ Admin users already exist, skipping auto-seed');
+    const existingByEmail = await User.countDocuments({
+      email: { $in: adminEmails }
+    });
+
+    // If proper admin users exist (with correct roles), skip seeding
+    if (existingByRole > 0) {
+      console.log('✅ Admin users with proper roles already exist, skipping auto-seed');
       return;
     }
 
-    console.log('🌱 No admin users found, auto-seeding...');
+    // If users with admin emails exist but without proper roles, clean them up first
+    if (existingByEmail > 0) {
+      console.log('🧹 Cleaning up old users with admin emails (from previous deployments)...');
+      await User.deleteMany({ email: { $in: adminEmails } });
+      console.log('✅ Old users cleaned up');
+    }
+
+    console.log('🌱 Auto-seeding admin users...');
 
     const adminUsers = [
       {
