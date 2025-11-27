@@ -1,7 +1,5 @@
 import axios from 'axios';
-
-// API base URL - uses environment variable in production, proxy in development
-const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
+import { API_BASE_URL } from '../config';
 
 // Create axios instance with default configuration
 export const api = axios.create({

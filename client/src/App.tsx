@@ -30,6 +30,8 @@ import SettingsPage from './pages/admin/SettingsPage'
 import RolesPermissionsPage from './pages/admin/RolesPermissionsPage'
 import MediaLibraryPage from './pages/admin/MediaLibraryPage'
 
+import ConfigDebugPage from './pages/ConfigDebugPage';
+
 function App() {
   const location = useLocation()
 
@@ -86,6 +88,9 @@ function App() {
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/admin/login" element={<AdminLoginPage />} />
+              
+              {/* Debug route */}
+              <Route path="/config-debug" element={<ConfigDebugPage />} />
               
               {/* Protected routes */}
               <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
