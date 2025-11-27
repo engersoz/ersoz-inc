@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const autoSeedAdminUsers = require('../utils/autoSeedAdmins');
 
 const connectDB = async () => {
   try {
@@ -10,6 +11,9 @@ const connectDB = async () => {
     });
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+
+    // Auto-seed admin users if they don't exist (no shell access needed!)
+    await autoSeedAdminUsers();
 
     // Set up connection event listeners
     mongoose.connection.on('error', (err) => {
