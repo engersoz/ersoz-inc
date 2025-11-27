@@ -12,7 +12,9 @@ import {
   Menu,
   X,
   Bell,
-  Search
+  Search,
+  Shield,
+  Image,
 } from 'lucide-react';
 import { useAuthStore } from '../../store/authStore';
 
@@ -34,6 +36,8 @@ const AdminLayout: React.FC = () => {
     { name: 'Orders', href: '/admin/orders', icon: ShoppingCart },
     { name: 'Quotes', href: '/admin/quotes', icon: FileText },
     { name: 'Analytics', href: '/admin/analytics', icon: BarChart3 },
+    { name: 'Roles & Permissions', href: '/admin/roles', icon: Shield },
+    { name: 'Media Library', href: '/admin/media', icon: Image },
     { name: 'Settings', href: '/admin/settings', icon: Settings },
   ];
 

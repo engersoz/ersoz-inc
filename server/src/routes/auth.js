@@ -83,7 +83,7 @@ router.post('/register', [
 
     // Create user with default permissions based on role
     const defaultPermissions = {
-      client: [
+      customer: [
         { module: 'products', actions: ['read'] },
         { module: 'configurator', actions: ['create', 'read', 'update'] },
         { module: 'quotes', actions: ['create', 'read'] },
@@ -92,15 +92,30 @@ router.post('/register', [
       vendor: [
         { module: 'products', actions: ['create', 'read', 'update'] },
         { module: 'inventory', actions: ['read', 'update'] }
+      ],
+      user: [
+        { module: 'products', actions: ['read', 'update'] },
+        { module: 'orders', actions: ['read', 'update'] },
+        { module: 'quotes', actions: ['read', 'update'] }
+      ],
+      admin: [
+        { module: 'products', actions: ['create', 'read', 'update', 'delete'] },
+        { module: 'orders', actions: ['create', 'read', 'update', 'delete'] },
+        { module: 'users', actions: ['read', 'update'] },
+        { module: 'analytics', actions: ['read'] }
       ]
     };
+
+    // Only allow customer and vendor registration publicly
+    const allowedRoles = ['customer', 'vendor'];
+    const userRole = allowedRoles.includes(role) ? role : 'customer';
 
     const user = await User.create({
       name,
       email,
       passwordHash: password, // Will be hashed by pre-save middleware
       company,
-      role: ['client', 'vendor'].includes(role) ? role : 'client',
+      role: userRole,
       locale,
       currency,
       permissions: defaultPermissions[role] || defaultPermissions.client,

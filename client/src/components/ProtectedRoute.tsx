@@ -5,18 +5,27 @@ import { useAuthStore } from '../store/authStore';
 interface ProtectedRouteProps {
   children: React.ReactNode;
   requireAdmin?: boolean;
+  requiredRoles?: string[];
 }
 
-const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireAdmin = false }) => {
+const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ 
+  children, 
+  requireAdmin = false,
+  requiredRoles 
+}) => {
   const { user, isAuthenticated } = useAuthStore();
 
-  // Check if user is authenticated
   if (!isAuthenticated || !user) {
     return <Navigate to="/login" replace />;
   }
 
-  // Check if admin access is required
-  if (requireAdmin && user.role !== 'admin') {
+  const hasRequiredRole = requiredRoles 
+    ? requiredRoles.includes(user.role)
+    : true;
+
+  const isAdmin = ['owner', 'super_admin', 'admin'].includes(user.role);
+  
+  if ((requireAdmin && !isAdmin) || !hasRequiredRole) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8 text-center">
@@ -27,9 +36,9 @@ const ProtectedRoute: React.FC<ProtectedRouteProps> = ({ children, requireAdmin 
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-2">Access Denied</h2>
           <p className="text-gray-600 mb-6">
-            You don't have permission to access the admin panel.
+            You don't have permission to access this area.
             <br />
-            Admin access is required.
+            {requiredRoles ? `Required roles: ${requiredRoles.join(', ')}` : 'Admin access is required.'}
           </p>
           <div className="space-y-3">
             <p className="text-sm text-gray-500">

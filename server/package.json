@@ -12,7 +12,9 @@
     "lint": "eslint src/**/*.js",
     "lint:fix": "eslint src/**/*.js --fix",
     "seed:products": "node src/scripts/seedProducts.js",
-    "seed:products:clear": "node src/scripts/seedProducts.js --clear"
+    "seed:products:clear": "node src/scripts/seedProducts.js --clear",
+    "seed:admin": "node src/scripts/seedAdminUsers.js",
+    "seed:admin:clear": "node src/scripts/seedAdminUsers.js --clear"
   },
   "dependencies": {
     "express": "^4.18.2",

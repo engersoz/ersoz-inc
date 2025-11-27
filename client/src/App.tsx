@@ -15,6 +15,7 @@ import ProductDetailsPage from './pages/ProductDetailsPage'
 import CertificatesPage from './pages/CertificatesPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
+import AdminLoginPage from './pages/AdminLoginPage'
 import DashboardPage from './pages/DashboardPage'
 import QuotesPage from './pages/QuotesPage'
 
@@ -26,25 +27,33 @@ import OrdersManagementPage from './pages/admin/OrdersManagementPage'
 import QuotesManagementPage from './pages/admin/QuotesManagementPage'
 import AnalyticsPage from './pages/admin/AnalyticsPage'
 import SettingsPage from './pages/admin/SettingsPage'
+import RolesPermissionsPage from './pages/admin/RolesPermissionsPage'
+import MediaLibraryPage from './pages/admin/MediaLibraryPage'
 
 function App() {
   const location = useLocation()
 
   // Check if current page should have minimal layout (auth pages or admin pages)
-  const isAuthPage = ['/login', '/register'].includes(location.pathname)
+  const isAuthPage = ['/login', '/register', '/admin/login'].includes(location.pathname)
   const isAdminPage = location.pathname.startsWith('/admin')
   
-  // Admin pages use their own layout
+  // Admin pages use their own layout with PROTECTION
   if (isAdminPage) {
     return (
       <Routes>
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route path="/admin" element={
+          <ProtectedRoute requiredRoles={['owner', 'super_admin', 'admin']}>
+            <AdminLayout />
+          </ProtectedRoute>
+        }>
           <Route index element={<AdminDashboardPage />} />
           <Route path="users" element={<UsersManagementPage />} />
           <Route path="products" element={<ProductsManagementPage />} />
           <Route path="orders" element={<OrdersManagementPage />} />
           <Route path="quotes" element={<QuotesManagementPage />} />
           <Route path="analytics" element={<AnalyticsPage />} />
+          <Route path="roles" element={<RolesPermissionsPage />} />
+          <Route path="media" element={<MediaLibraryPage />} />
           <Route path="settings" element={<SettingsPage />} />
         </Route>
       </Routes>
@@ -76,6 +85,7 @@ function App() {
               {/* Auth routes */}
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
+              <Route path="/admin/login" element={<AdminLoginPage />} />
               
               {/* Protected routes */}
               <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
