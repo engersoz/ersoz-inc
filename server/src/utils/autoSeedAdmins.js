@@ -111,16 +111,17 @@ const autoSeedAdminUsers = async () => {
     ];
 
     // Create all admin users
-    await User.insertMany(adminUsers);
+    const created = await User.insertMany(adminUsers);
 
     console.log('✅ Auto-seed completed successfully!');
-    console.log('📝 Created admin users:');
+    console.log(`📝 Created ${created.length} admin users:`);
     console.log('   - Owner: admin@ersozinc.com / Admin123!@#');
     console.log('   - Super Admin: superadmin@ersozinc.com / SuperAdmin123!');
     console.log('   - Admin: manager@ersozinc.com / Manager123!');
     console.log('   - Sales: sales@ersozinc.com / Sales123!');
     console.log('   - Support: support@ersozinc.com / Support123!');
     console.log('⚠️  IMPORTANT: Change these passwords after first login!');
+    console.log('🔐 You can now login at: /admin/login');
 
   } catch (error) {
     console.error('❌ Auto-seed failed:', error.message);
