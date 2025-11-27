@@ -35,7 +35,7 @@ function App() {
 
   // Check if current page should have minimal layout (auth pages or admin pages)
   const isAuthPage = ['/login', '/register', '/admin/login'].includes(location.pathname)
-  const isAdminPage = location.pathname.startsWith('/admin')
+  const isAdminPage = location.pathname.startsWith('/admin') && location.pathname !== '/admin/login'
   
   // Admin pages use their own layout with PROTECTION
   if (isAdminPage) {
