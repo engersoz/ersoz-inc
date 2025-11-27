@@ -69,7 +69,7 @@ router.post('/register', [
     }
 
     const {
-      name, email, password, company, role = 'client', locale = 'en', currency = 'USD'
+      name, email, password, company, role = 'customer', locale = 'en', currency = 'USD'
     } = req.body;
 
     // Check if user exists

@@ -51,7 +51,7 @@ router.get('/', async (req, res, next) => {
 
     // Build filter based on user role
     const filter = {};
-    if (req.user.role === 'client') {
+    if (req.user.role === 'customer') {
       filter.userId = req.user.id;
     } else if (req.user.role === 'sales') {
       // Sales can see assigned quotes or unassigned ones
@@ -151,7 +151,7 @@ router.get('/', async (req, res, next) => {
 router.get('/:id', async (req, res, next) => {
   try {
     const filter = { _id: req.params.id };
-    if (req.user.role === 'client') {
+    if (req.user.role === 'customer') {
       filter.userId = req.user.id;
     }
 
@@ -273,7 +273,7 @@ router.post('/', [
     });
 
     // Auto-assign to available sales rep (simple round-robin)
-    if (req.user.role === 'client') {
+    if (req.user.role === 'customer') {
       const User = require('../models/User');
       const salesReps = await User.find({ role: 'sales', status: 'active' }).select('_id');
       if (salesReps.length > 0) {
