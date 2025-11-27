@@ -118,7 +118,7 @@ router.post('/register', [
       role: userRole,
       locale,
       currency,
-      permissions: defaultPermissions[role] || defaultPermissions.client,
+      permissions: defaultPermissions[userRole] || defaultPermissions.customer,
       gdprConsent: true,
       gdprConsentDate: new Date(),
       dataProcessingConsent: true
