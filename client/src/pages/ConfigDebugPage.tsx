@@ -56,10 +56,10 @@ const ConfigDebugPage: React.FC = () => {
             <div className="bg-yellow-50 border border-yellow-200 rounded p-4">
               <h3 className="font-semibold text-yellow-800 mb-2">Expected Values:</h3>
               <div className="text-sm space-y-1 text-yellow-700">
-                <p>✅ VITE_API_URL should be: <code className="bg-yellow-100 px-1">https://ersoz-inc-api.onrender.com/api</code></p>
+                <p>✅ VITE_API_URL should be: <code className="bg-yellow-100 px-1">https://ersoz-inc-api.onrender.com/api/v1</code></p>
                 <p>✅ MODE should be: <code className="bg-yellow-100 px-1">production</code></p>
                 <p>✅ PROD should be: <code className="bg-yellow-100 px-1">true</code></p>
-                <p>✅ API_BASE_URL should be: <code className="bg-yellow-100 px-1">https://ersoz-inc-api.onrender.com/api</code></p>
+                <p>✅ API_BASE_URL should be: <code className="bg-yellow-100 px-1">https://ersoz-inc-api.onrender.com/api/v1</code></p>
               </div>
             </div>
 

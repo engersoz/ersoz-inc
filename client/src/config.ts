@@ -4,7 +4,7 @@
 // Get API URL from environment variable or use production default
 export const API_BASE_URL = 
   import.meta.env.VITE_API_URL || 
-  'https://ersoz-inc-api.onrender.com/api';
+  'https://ersoz-inc-api.onrender.com/api/v1';
 
 // Log the API URL in development for debugging
 if (import.meta.env.DEV) {
