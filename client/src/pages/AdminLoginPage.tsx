@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Shield, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuthStore } from '../store/authStore';
-import axios from 'axios';
+import { api } from '../lib/api';
 
 const AdminLoginPage: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -18,8 +18,7 @@ const AdminLoginPage: React.FC = () => {
     setIsLoading(true);
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-      const response = await axios.post(`${API_URL}/auth/login`, {
+      const response = await api.post('/auth/login', {
         email,
         password
       });
