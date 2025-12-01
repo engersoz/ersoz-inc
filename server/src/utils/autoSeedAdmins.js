@@ -46,7 +46,7 @@ const autoSeedAdminUsers = async () => {
       {
         name: 'Engin Ersoz',
         email: 'admin@ersozinc.com',
-        passwordHash: 'Admin123!@#', // Will be hashed by pre-save middleware
+        passwordHash: hashedPasswords.owner,
         company: 'ERSOZ INC',
         role: 'owner',
         emailVerified: true,
@@ -55,7 +55,7 @@ const autoSeedAdminUsers = async () => {
       {
         name: 'Super Admin',
         email: 'superadmin@ersozinc.com',
-        passwordHash: 'SuperAdmin123!',
+        passwordHash: hashedPasswords.superadmin,
         company: 'ERSOZ INC',
         role: 'super_admin',
         emailVerified: true,
@@ -73,7 +73,7 @@ const autoSeedAdminUsers = async () => {
       {
         name: 'Admin Manager',
         email: 'manager@ersozinc.com',
-        passwordHash: 'Manager123!',
+        passwordHash: hashedPasswords.admin,
         company: 'ERSOZ INC',
         role: 'admin',
         emailVerified: true,
@@ -88,7 +88,7 @@ const autoSeedAdminUsers = async () => {
       {
         name: 'Sales Staff',
         email: 'sales@ersozinc.com',
-        passwordHash: 'Sales123!',
+        passwordHash: hashedPasswords.sales,
         company: 'ERSOZ INC',
         role: 'user',
         emailVerified: true,
