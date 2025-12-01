@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const bcrypt = require('bcryptjs');
 
 /**
  * Auto-seed admin users on startup if they don't exist
@@ -100,7 +101,7 @@ const autoSeedAdminUsers = async () => {
       {
         name: 'Support Staff',
         email: 'support@ersozinc.com',
-        passwordHash: 'Support123!',
+        passwordHash: hashedPasswords.support,
         company: 'ERSOZ INC',
         role: 'user',
         emailVerified: true,
